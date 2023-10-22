@@ -2,6 +2,20 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Define an appropriate struct
+typedef struct {
+	char date[11];
+	char time[6];
+	int steps;
+} FITNESS_DATA;
+
+// Define any additional variables here
+
+
+
+// This is your helper function. Do not change it in any way.
+// Inputs: character array representing a row; the delimiter character
+// Ouputs: date character array; time character array; steps character array
 void tokeniseRecord(const char *input, const char *delimiter,
                     char *date, char *time, char *steps) {
     // Create a copy of the input string as strtok modifies the string
@@ -27,23 +41,8 @@ void tokeniseRecord(const char *input, const char *delimiter,
 
 }
 
+// Complete the main function
 int main() {
-    char record[21] = "2023-09-01,07:30,300";
-    char date[11];
-    char time[6];
-    char steps[10];  // Large enough to hold a typical step count as a string
 
-    int stepsint;
-    
-    tokeniseRecord(record, ",", date, time, steps);
-    
-    printf("Date: %s\n", date);
-    printf("Time: %s\n", time);
-    printf("Steps: %s\n", steps);
 
-    // Convert the steps string to an integer
-    stepsint = atoi(steps);
-    printf("Steps as an integer: %d\n", stepsint);
-    
-    return 0;
 }
