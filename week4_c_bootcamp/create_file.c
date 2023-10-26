@@ -10,7 +10,7 @@ int main()
         perror("File I/O"); //perror means print error message
         return 1;
     }
-    printf("file is %ld\n", file);
+    printf("file is %ld\n", file); 
     
     fclose(file);
     return 0;
