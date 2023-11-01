@@ -59,8 +59,11 @@ int main() {
         return 1;
     }
 
+    // Set the buffer size to 100
+    int buffer_size = 100;
+
     // Value to hold per line at the time in the FitnessData
-    char buffer[255];
+    char line_buffer[255];
 
     // Create a suitable size and structure array
     // Store up to 255 Fitness Data records from the file into that array
@@ -73,17 +76,18 @@ int main() {
     // To track the number of records in the file
     int record = 0;
 
-    do{
-        // returns the number of values that it was able to read in successfully
-        read = fscanf(file,
-                    "%c,%c,%d\n",
-                    &fitness_data[record].date,
-                    &fitness_data[record].time,
-                    &fitness_data[record].steps);
+    // to print only 3 records in the FitnessData using for loop
+    // with condition as less or equal to 3
+    for (int i = 0; i <= 3; ++i)
+    {
+        // Read a line from the file
+        if(fgets(line_buffer, buffer_size, file) != NULL)
+        {
 
+        }
 
-    }while (!feof(file)); 
-    // ! feof means continue so long as we haven't reached the end of the file
+    }
+
 
     fclose(file);
     return 0;
