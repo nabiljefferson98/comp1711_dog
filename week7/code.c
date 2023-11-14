@@ -79,12 +79,7 @@ int main()
             
             
            
-            for (int i = 0; i < counter; i++)
-            {
-                printf("%s - Blood iron: %.1f\n", dataArray[i].date, dataArray[i].bloodIron);
-            }
-            fclose(input);
-            break;
+
 
 
 

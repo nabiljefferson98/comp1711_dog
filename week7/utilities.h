@@ -106,10 +106,12 @@ int read_file(FILE *inputFile, reading *dataArray)
 int data_checker(reading *dataArray, int numReadings)
 {
     int counter = 0;
-    while (fgets(line, buffer_size, input))
+    for (int i = 0; i < counter; i++)
     {
-        tokeniseRecord
-    } 
+        printf("%s - Blood iron: %.1f\n", dataArray[i].date, dataArray[i].bloodIron);
+    }
+    fclose(input);
+    break;
 }
 
 
