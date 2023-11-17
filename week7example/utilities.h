@@ -51,12 +51,6 @@ void tokeniseRecord(const char *input, const char *delimiter,
     free(inputCopy);
 }
 
-
-char line[buffer_size];
-char filename[buffer_size];
-int counter = 0;
-float mean = 0;
-
 // SUGGESTED FUNCTIONS
 
 /**
@@ -68,15 +62,7 @@ float mean = 0;
  */
 FILE *open_file(char *filename, char *mode)
 {
-    char* filename = "data.txt";
-    FILE *file = fopen(filename, "r");
-    if (file == NULL)
-    {
-        printf("Error open file\n");
-    }
-
-    return file;
-
+    // to do
 }
 
 /**
@@ -86,18 +72,9 @@ FILE *open_file(char *filename, char *mode)
  * @param dataArray the array of readings
  * @return int Returns the number of readings from the file
  */
-int read_file(FILE *filename, reading *dataArray)
+int read_file(FILE *inputFile, reading *dataArray)
 {
-    while (fgets(line, buffer_size, filename))
-    {
-        // split up the line and store it in the right place
-        // using the & operator to pass in a pointer to the bloodIron so it stores it
-        tokeniseRecord(line, ",", dataArray[counter].date, &dataArray[counter].bloodIron);
-        counter++;
-        
-    }
-
-    return counter;
+    // to do
 }
 
 /**
@@ -109,20 +86,7 @@ int read_file(FILE *filename, reading *dataArray)
  */
 int data_checker(reading *dataArray, int numReadings)
 {
-    for (int i = 0; i < counter; i++)
-    {
-        // use if else to check error
-        // if (dataArray[i].bloodIron == NULL)
-        // {
-        //     printf("there's error");
-        //     break;
-        // }
-        
-        printf("%s - Blood iron: %.1f\n", dataArray[i].date, dataArray[i].bloodIron);
-        return 0;
-    }
-
-    return 1;
+    // to do
 }
 
 
@@ -136,10 +100,6 @@ int data_checker(reading *dataArray, int numReadings)
 float find_mean(reading* dataArray, int numReadings)
 {
     // to do
-    mean /= counter;
-    printf("Your average blood iron was %.2f\n", mean);
-
-    return mean;
 }
 
 /**

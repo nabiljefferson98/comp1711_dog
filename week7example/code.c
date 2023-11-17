@@ -1,19 +1,12 @@
 #include "utilities.h"
-// 
-/*  
-    h is a header file, but in this case, its a file to put a code
-    utilities 
-*/
 
 int main()
 {
     // array of daily readings
-    //reading daily_readings[100];
-    reading dataArray[100];
+    reading daily_readings[100];
 
     char line[buffer_size];
     char filename[buffer_size];
-    
 
     // get filename from the user
     printf("Please enter the name of the data file: ");
@@ -24,22 +17,18 @@ int main()
     fgets(line, buffer_size, stdin);
     sscanf(line, " %s ", filename);
 
-    // call a function and it returns a FILE*
-    FILE* file = open_file(filename, "r");
-    if (!file)
-    {
-        printf("Error: File could not be opened\n");
-        return 1;
-    }
-    // and uses it in here, the read_file
-    int data_array_length = read_file(file, dataArray);
-    // close the file 
-    fclose(file);
-
     char choice;
+    int counter = 0;
+    float mean = 0;
 
     while (1)
     {
+        FILE *input = fopen(filename, "r");
+        if (!input)
+        {
+            printf("Error: File could not be opened\n");
+            return 1;
+        }
 
         printf("A: View all your blood iron levels\n");                       // BRONZE
         printf("B: View your average blood iron level\n");                    // BRONZE
@@ -51,7 +40,7 @@ int main()
         printf("Q: Exit the program\n");
 
         // get the next character typed in and store in the 'choice'
-        choice = getchar(); // it get 1 character as a choice
+        choice = getchar();
 
         // this gets rid of the newline character which the user will enter
         // as otherwise this will stay in the stdin and be read next time
@@ -64,12 +53,35 @@ int main()
         // this allows for either capital or lower case
         case 'A':
         case 'a':
-            return 0;
+            counter = 0;
+            while (fgets(line, buffer_size, input))
+            {
+                // split up the line and store it in the right place
+                // using the & operator to pass in a pointer to the bloodIron so it stores it
+                tokeniseRecord(line, ",", daily_readings[counter].date, &daily_readings[counter].bloodIron);
+                counter++;
+            }
+            for (int i = 0; i < counter; i++)
+            {
+                printf("%s - Blood iron: %.1f\n", daily_readings[i].date, daily_readings[i].bloodIron);
+            }
+            fclose(input);
             break;
 
         case 'B':
-        case 'b': 
-            return 0;
+        case 'b':
+            counter = 0;
+            while (fgets(line, buffer_size, input))
+            {
+                // split up the line and store it in the right place
+                // using the & operator to pass in a pointer to the bloodIron so it stores it
+                tokeniseRecord(line, ",", daily_readings[counter].date, &daily_readings[counter].bloodIron);
+                mean += daily_readings[counter].bloodIron;
+                counter++;
+            }
+            mean /= counter;
+            printf("Your average blood iron was %.2f\n", mean);
+            fclose(input);
             break;
 
         case 'C':
@@ -109,12 +121,3 @@ int main()
         }
     }
 }
-
-
-/*
-    It's ok to write code longer, the compiler will optimised any unnecessary line of codes.
-    Avoid to put lot's of stuff in main, better to do fewer line in there, just create functions or smaller chunks of modules.
-    It's fine to write functions with 5-6 lines, meaning it's should work less.
-    but the calling functions is expensive, if worried, the compiler will optimised for us
-
-*/
