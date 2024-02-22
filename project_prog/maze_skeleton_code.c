@@ -1,162 +1,138 @@
-// buat coding berfungsi utk dpt output dr test case yg diberikan oleh test scripts
-
+// Skeleton code for the maze game
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 
-// Set the maze map height and width
-#define WIDTH 20
-#define HEIGHT 20
-char maze[HEIGHT][WIDTH];
+// Set height and a width, with a maximum of 100 and a minimum of 5
+#define MAX_HEIGHT 100
+#define MIN_HEIGHT 5
+#define MAX_WIDTH 100
+#define MIN_WIDTH 5
 
-void timer();
-void drawMaze();
-void playerControl();
+// Struct to represent the maze
+typedef struct {
+    char maze[MAX_HEIGHT][MAX_WIDTH];
+    int height;
+    int width;
+    int playerPosRow;
+    int playerPosCol;
+} Maze;
 
-int main()
+int loadMaze(const char *filename, Maze *maze);
+void displayMaze(const Maze *maze);
+void movePlayer(Maze *maze, char move);
+void hasPlayerWon(const Maze *maze) 
+
+// Main method
+int main(int argc, char *argv[]) 
 {
-    // Set player position inside mazeusing player x-axis and player y-axis
-    int playerXaxis, playerYaxis = 0;
-    char start, afterGame;
-
-    // Use while loop incase player wants to restart the maze game
-    while (0 || 1)
-    {    
-        // Print a welcome and start button to start using scanf
-        printf("Welcome to the maze game!\n");
-        printf("Press 'M/m' to start: \n");
-        scanf("%c", &start);
-
-        // Using while loop to check user input if player press other than 'M/m' 
-        while (start != 'M' || start != 'm')
-        {
-            // If user input not true, print an error and request user to entering input correctly
-            printf("Invalid input! Please press 'M/m' to start the game\n");
-        }
-
-        // After user input correctly, the timer starts
-        timer();
-        // Follow by the maze map is generate
-        drawMaze();
-        // Lastly, print the player instruction to play the game
-        playerControl();
-
-        
-        // Print a congratulation message when player finished the maze before timer runs out
-        printf("Congratulations! You finished the maze!!\n");
-        // Print if the player wants to play again
-        printf("Press 'R/r' to restart the game or 'Q/q' to quit the game: \n");
-        // Use scanf to check user input
-        scanf("%c", &afterGame);
-
-        // Check the user input
-        if (afterGame == 'r'|| afterGame = 'R')
-        {
-            // Restart the game
-            // Return(1)
-        }
-        else if (afterGame == 'q' || afterGame = 'Q')
-        {
-            // Quit the game
-            // using exit(1)
-        }
-        else
-        {
-            // Print an error request player to input correctly 
-        }
+    if (argc != 1) {
+        printf("Usage: %s <maze_file>\n", argv[0]);
+        return 0;
+        exit(1);
     }
-}
 
-/*
-    class for game timer (potentially using time.h library)
-    - Count timer from start to finish
-    - Display timer on screen
-    - Timer need to refresh every second
-*/
+    // Calling the maze struct and set name as gameMaze
+    Maze gameMaze;
 
-// Function for timer 
-void timer()
-{
-    // Print the timer notification above the maze map
-    printf("You have 5 minutes to finish the maze.\n");
-    printf("Goodluck!\n");
-    // Implement timer using time.h library
-    srand(time(300));
-}
-
-/*
-    class for draw and generate maze
-    - Use char array to represent maze
-    - Use random number generator to generate maze
-*/
-
-// Function to generate / draw the maze map
-void drawMaze()
-{
-    // Generate maze map using for loop including player position
-    for (int i = 0; i < HEIGHT; i++)
+    // Load the maze from the file
+    if (loadMaze(argv[1], &gameMaze) == 0) 
     {
-        for (int j = 0; j < WIDTH; j++)
-        {
-            if (i == playerXaxis && j == playerYaxis)
-            {
-                printf("P");
-            }
-            else
-            {
-                printf("%c", maze[i][j]);
-            }
-        }
-        printf("\n");
+        printf("Error loading the maze from the file.\n");
+        return 0;
+        exit(1);
+    }
+
+    printf("Maze loaded successfully!\n");
+
+    char move;
+    
+    // Maze game loop
+    while (1) 
+    {
+        displayMaze(&gameMaze);
+
+        movePlayer(&gameMaze, move);
+
+        hasPlayerWon(&gameMaze);
+    }
+
+    return 0;
+}
+
+// Method to load the maze map from their file
+int loadMaze(const char *filename, Maze *maze);
+{
+    // Implement the method to read the maze from the file
+    // Set the maze's height, width and current player position
+    // Return 1 on success and 0 on failure
+
+    FILE *file = fopen(filename, "r");
+    if (file == NULL) {
+        printf("Error opening file or file not found.\n");
+        return 0;
     }
 }
 
-/*
-    class for player inputs
-    - Move player (W/w, A/a, S/s, D/d)
-    - Print a maze when player press 'm'
-*/
-
-// Function for player movement inside the maze map
-void playerControl()
+// Method to display the maze map
+void displayMaze(const Maze *maze);
 {
-    // Print the player's controller below the maze map
-    
-    char move;
-    printf("Use 'W/w', 'A/a', 'S/s', 'D/d' to move: ");
-    scanf("%c", &move);
+    // Display the maze map and current player position when player pressed "M"
+}
 
-    // Determine the player position based on the input using switch case
+// Method for player movement
+void movePlayer(Maze *maze, char move);
+{
+    // Display an player movement control
+    // Update player position based on the input move
+    // Display an error message if the move is invalid
+
+    // Get player's input
+    printf("Enter your move (W/A/S/D/M): ");    
+    scanf(" %c", &move);
+
     switch (move)
     {
-        case 'W' || 'w':
-            playerXaxis--;
-            break;
-        
-        case 'A' || 'a':
-            playerYaxis--;
-            break;
-        
-        case 'S' || 's':
-            playerXaxis++;
+        case "w" || "W":
+            // Check if the player can move up
             break;
 
-        case 'D' || 'd':
-            playerYaxis++;
+        case "a" || "A":
+            // Check if the player can move left
+            break;
+        
+        case "s" || "S":
+            // Check if the player can move down
+            break;
+
+        case "d" || "D":
+            // Check if the player can move right
             break;
 
         default:
-            // Print error if player incorrect input
-            printf("Invalid move!\n");
+            // Display an error message if the move is invalid
+            printf("Invalid move. Please enter W, A, S, or D.\n");
             break;
     }
+}
 
+ // Method to check if the player has won
+void hasPlayerWon(const Maze *maze) 
+{
+    // Check if the player has reached the exit
+    // Display a message if the player has won the game
+    // Return 1 if the player has won, 0 otherwise
+
+    printf("Congratulations! You've reached the exit.\n");
+    return 1;
 }
 
 /*
     Reference I've used as follows:
     a) https://www.geeksforgeeks.org/maze-generation-algorithm-backtracking-2/
     b) https://www.geeksforgeeks.org/maze-generation-algorithms/
-    c) 
-    d) Programming Maze by javidx9: https://youtu.be/Y37-gB83HKE?si=iI3SJgJUk8H53q_O   
+    c) Programming Maze by javidx9: https://youtu.be/Y37-gB83HKE?si=iI3SJgJUk8H53q_O
+    d) Reference from the Procedural Programming Task 1 and 2
+    e) 
 */
