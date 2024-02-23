@@ -1,0 +1,19 @@
+name: Run Maze Tests
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run maze tests
+        run: |
+          # Add commands to run your test script
+          ./project_prog/testscript.sh
