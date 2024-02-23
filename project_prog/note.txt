@@ -1,0 +1,22 @@
+a. syarat maze game
+- kena ada instance s (start), e (exit) dan # (dinding)
+- 
+
+
+
+test case:
+- takde dinding & player terkeluar dr maze map
+- bare min test case 10 tapi lg bagus 20-30 sample of potential errors
+
+
+* blh guna chatgpt utk mintak sample test data maze map dgn mengandungi dinding "#"
+* blh guna resources luar tapi kena wajib letak references
+* bagus ada letak functionality utk tunjuk map bila tekan map
+* markah mantap jika pensyarah dpt run code kita dgn guna kita punya outline
+* lagi senang guna unit testing banding writing code dgn bash
+* pensyarah akan mengira markah mengikut kefahaman kita tentang kerja ni. bkn kena berfungsi.
+walaupun guna bash. Dia nk semak/uji kefahaman kita je
+* lg bagus asingkan setiap test dgn echo @ comment
+* skeleton markah kalau nk tinggi, kena details dan mcm2 function method (10-15 method). basically, kena gempak tapi x perlu berfungsi
+* success test kena ada 1 sebab nk tahu ia berjaya
+* guna ASCII art archieve (kena credit gak), pensyarah suka armadillo
